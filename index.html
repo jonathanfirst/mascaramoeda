@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Exemplo de máscara - BRL</title>
+</head>
+
+<body>
+    <div class="col-md-3">
+        <h4>Exemplo de mascará dinheiro</h4>
+        <label for="">Teste de valor</label>
+        <input type="text" name="campo_teste_name" id="campo_teste_id" class="form-control" value="">
+    </div>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        formatarMoeda($('#campo_teste_id'));
+    });
+
+    function formatarMoeda(obj) {
+        $(obj).on('keyup', function () {
+            var valorDigitado = obj.val();
+            valorDigitado = valorDigitado.replace('R$ ', '');
+            var valorDigitado_int = parseInt(valorDigitado.replace(/[\D]+/g, ''));
+
+            var valorFormatado = new Intl.NumberFormat('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(valorDigitado_int / 100)
+
+            var valorFormatado = 'R$ ' + valorFormatado;
+            obj.val(valorFormatado);
+        });
+    }
+</script>
+
+</html>
