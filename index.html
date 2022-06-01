@@ -27,14 +27,16 @@
         $(obj).on('keyup', function () {
             var valorDigitado = obj.val();
             valorDigitado = valorDigitado.replace('R$ ', '');
+			if (valorDigitado == '')
+			  valorDigitado = '0';            
             var valorDigitado_int = parseInt(valorDigitado.replace(/[\D]+/g, ''));
-
+            
             var valorFormatado = new Intl.NumberFormat('pt-BR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }).format(valorDigitado_int / 100)
 
-            var valorFormatado = 'R$ ' + valorFormatado;
+            valorFormatado = 'R$ ' + valorFormatado;
             obj.val(valorFormatado);
         });
     }
